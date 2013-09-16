@@ -199,18 +199,18 @@ const Listview = new Lang.Class({
             let uri = file.uri;
             this._discoverer.discover_uri_async(uri);
         }
-        this._runDiscover(uri, i);
+        this._runDiscover(this.idx);
      },
      
-     _runDiscover: function(uri, idx) {                     
+     _runDiscover: function(idx) {                     
         this._discoverer.connect('discovered', Lang.bind(this, 
             function(_discoverer, info, error) {
                 let result = info.get_result();
-                this._onDiscovererFinished(result, info, error, uri, idx); 
+                this._onDiscovererFinished(result, info, error, idx); 
              })); 
     },
                         
-    _onDiscovererFinished: function(res, info, err, uri, idx) {
+    _onDiscovererFinished: function(res, info, err, idx) {
         this.result = res;
 
         if (this.result == GstPbutils.DiscovererResult.OK) { 
@@ -253,11 +253,11 @@ const Listview = new Lang.Class({
             log("File cannot be played"); 
         } 
         
-        if (idx == this.endIdx) { 
+        if (idx == this.endIdx -1) { 
         //Will this work? if the discoverer is running parallel then the last index won't always finish last, so what is proper here? 
                // this._discoverer.stop();
         log("this.listType discovering" + listType);
-            
+        this._discoverer.stop();    
         if (listType == ListType.NEW) {
             MainWindow.view.listBoxAdd();
             MainWindow.view.scrolledWinAdd();
