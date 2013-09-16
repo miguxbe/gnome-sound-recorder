@@ -193,13 +193,13 @@ const Listview = new Lang.Class({
         this.idx = 0;
         this._discoverer = new GstPbutils.Discoverer();
         this._discoverer.start();
-        for (let i = this.idx; i < this.endIdx; i++) {
+        for (let i = 0; i < this.endIdx; i++) {
             let file = allFilesInfo[i];
             log(file.fileName);
             let uri = file.uri;
             this._discoverer.discover_uri_async(uri);
         }
-        this._runDiscover(this.idx);
+        this._runDiscover();
      },
      
      _runDiscover: function(idx) {                     
@@ -210,9 +210,9 @@ const Listview = new Lang.Class({
              })); 
     },
                         
-    _onDiscovererFinished: function(res, info, err, idx) {
+    _onDiscovererFinished: function(res, info, err) {
         this.result = res;
-
+        log(this.idx);
         if (this.result == GstPbutils.DiscovererResult.OK) { 
             this.tagInfo = info.get_tags(info);
             let appString = "";
@@ -222,7 +222,7 @@ const Listview = new Lang.Class({
             let title = this.tagInfo.get_string('title')[1];
             let durationInfo = info.get_duration();
             log(durationInfo + "duration from listview");
-            allFilesInfo[idx].duration = durationInfo;
+            allFilesInfo[this.idx].duration = durationInfo;
             
             if (title != null) {
                 this.file.title = title;
@@ -235,25 +235,24 @@ const Listview = new Lang.Class({
                 dateTimeCreatedString = dateTimeTag.to_g_date_time();
                 
                 if (dateTimeCreatedString) {
-                    allFilesInfo[idx].dateCreated = dateTimeCreatedString.format(_("%Y-%m-%d %H:%M:%S")); 
-                   log("dateCreated" + allFilesInfo[idx].dateCreated);
+                    allFilesInfo[this.idx].dateCreated = dateTimeCreatedString.format(_("%Y-%m-%d %H:%M:%S")); 
+                   log("dateCreated" + allFilesInfo[this.idx].dateCreated);
                 } else if (this.dateCreatedString) {
-                    allFilesInfo[idx].dateCreated = this.dateCreatedString;
+                    allFilesInfo[this.idx].dateCreated = this.dateCreatedString;
                 }
             }              
             
             if (appString == GLib.get_application_name()) {
-                allFilesInfo[idx].appName = appString;
+                allFilesInfo[this.idx].appName = appString;
                 //log(this.file.appName);
             }
             
-            this._getCapsForList(info, idx);
+            this._getCapsForList(info);
         } else {
         // don't index files we can't play
             log("File cannot be played"); 
         } 
-        
-        if (idx == this.endIdx -1) { 
+        if (this.idx == this.endIdx -1) { 
         //Will this work? if the discoverer is running parallel then the last index won't always finish last, so what is proper here? 
                // this._discoverer.stop();
         log("this.listType discovering" + listType);
@@ -269,6 +268,8 @@ const Listview = new Lang.Class({
             log("this.currentlyEnumerating " +currentlyEnumerating);
         } 
         } 
+        
+        this.idx++;
                           
     },
     
@@ -303,7 +304,7 @@ const Listview = new Lang.Class({
         log("MainWindow.recordPipeline" + MainWindow.recordPipeline);     
     },
     
-    _getCapsForList: function(info, idx) {
+    _getCapsForList: function(info) {
         let discovererStreamInfo = null;
         discovererStreamInfo = info.get_stream_info();
         let s = discovererStreamInfo.get_stream_type_nick();
@@ -316,25 +317,25 @@ const Listview = new Lang.Class({
         if (GstPbutils.pb_utils_get_codec_description(containerCaps) == codecDescription.OGG) { 
                   
             if (GstPbutils.pb_utils_get_codec_description(audioCaps) == codecDescription.VORBIS) 
-                allFilesInfo[idx].mediaType = mediaTypeMap.OGG_VORBIS;
+                allFilesInfo[this.idx].mediaType = mediaTypeMap.OGG_VORBIS;
             else if (GstPbutils.pb_utils_get_codec_description(audioCaps) == codecDescription.OPUS) 
-                allFilesInfo[idx].mediaType = mediaTypeMap.OPUS;
+                allFilesInfo[this.idx].mediaType = mediaTypeMap.OPUS;
 
         } else if (GstPbutils.pb_utils_get_codec_description(containerCaps) == codecDescription.ID3) {
         
             if (GstPbutils.pb_utils_get_codec_description(audioCaps) == codecDescription.MP3) 
-                allFilesInfo[idx].mediaType = mediaTypeMap.MP3;
+                allFilesInfo[this.idx].mediaType = mediaTypeMap.MP3;
 
         } else if (GstPbutils.pb_utils_get_codec_description(containerCaps) == codecDescription.QT) {
         
             if (GstPbutils.pb_utils_get_codec_description(audioCaps) == codecDescription.MP4) 
-                allFilesInfo[idx].mediaType = mediaTypeMap.MP4;                
+                allFilesInfo[this.idx].mediaType = mediaTypeMap.MP4;                
 
         } else if (GstPbutils.pb_utils_get_codec_description(audioCaps) == codecDescription.FLAC) {
-            allFilesInfo[idx].mediaType = mediaTypeMap.FLAC;                          
+            allFilesInfo[this.idx].mediaType = mediaTypeMap.FLAC;                          
         } else {
         
-            if (allFilesInfo[idx].mediaType == null) 
+            if (allFilesInfo[this.idx].mediaType == null) 
                 allFilesInfo.splice(this.idx, 1);// Remove the file from the array if we don't recognize it        
         }        
     }, 
