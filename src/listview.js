@@ -193,7 +193,7 @@ const Listview = new Lang.Class({
         this.idx = 0;
         this._discoverer = new GstPbutils.Discoverer();
         this._discoverer.start();
-        for (let i = 0; i < this.endIdx; i++) {
+        for (let i = 0; i <= this.endIdx; i++) {
             let file = allFilesInfo[i];
             log(file.fileName);
             let uri = file.uri;
@@ -320,23 +320,29 @@ const Listview = new Lang.Class({
                 allFilesInfo[this.idx].mediaType = mediaTypeMap.OGG_VORBIS;
             else if (GstPbutils.pb_utils_get_codec_description(audioCaps) == codecDescription.OPUS) 
                 allFilesInfo[this.idx].mediaType = mediaTypeMap.OPUS;
+                 log(allFilesInfo[this.idx].fileName + "ogg");
 
         } else if (GstPbutils.pb_utils_get_codec_description(containerCaps) == codecDescription.ID3) {
         
             if (GstPbutils.pb_utils_get_codec_description(audioCaps) == codecDescription.MP3) 
                 allFilesInfo[this.idx].mediaType = mediaTypeMap.MP3;
+                log(allFilesInfo[this.idx].fileName + "mp3");
 
         } else if (GstPbutils.pb_utils_get_codec_description(containerCaps) == codecDescription.QT) {
         
             if (GstPbutils.pb_utils_get_codec_description(audioCaps) == codecDescription.MP4) 
-                allFilesInfo[this.idx].mediaType = mediaTypeMap.MP4;                
+                allFilesInfo[this.idx].mediaType = mediaTypeMap.MP4;
+                log(allFilesInfo[this.idx].fileName + "mp4");                
 
         } else if (GstPbutils.pb_utils_get_codec_description(audioCaps) == codecDescription.FLAC) {
-            allFilesInfo[this.idx].mediaType = mediaTypeMap.FLAC;                          
+            allFilesInfo[this.idx].mediaType = mediaTypeMap.FLAC; 
+            log(allFilesInfo[this.idx].fileName + "flac");                         
         } else {
         
-            if (allFilesInfo[this.idx].mediaType == null) 
-                allFilesInfo.splice(this.idx, 1);// Remove the file from the array if we don't recognize it        
+            if (allFilesInfo[this.idx].mediaType == null) {
+                let l = allFilesInfo.splice(this.idx, 1); // Remove the file from the array if we don't recognize it
+                log( l + "removed");
+            }       
         }        
     }, 
         
