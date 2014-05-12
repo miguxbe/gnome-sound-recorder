@@ -1,3 +1,11 @@
+ 3.12.2
+ =======
+ 
+ Fix GSchema settings
+ Use filesink instead of urisink
+ Use GstCaps.can_intersect to check the codec type
+ Remove window title when 0 sounds by Damián Nohales
+ 
  3.12.1
  =======
  
