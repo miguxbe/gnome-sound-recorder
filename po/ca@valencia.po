@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-09 01:08+0200\n"
-"PO-Revision-Date: 2014-05-08 00:57+0200\n"
+"POT-Creation-Date: 2014-06-03 01:14+0200\n"
+"PO-Revision-Date: 2014-03-09 17:45+0100\n"
 "Last-Translator: Pau Iranzo <paugnu@gmail.com>\n"
 "Language-Team: Catalan <gnome@llistes.softcatala.org>\n"
 "Language: ca-XV\n"
@@ -34,35 +34,41 @@ msgid "Window position (x and y)."
 msgstr "Posició de la finestra (x i y)."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
+msgid "Preferred media type for encoding audio when recording"
+msgstr "Tipus de format de codificació preferit per a l'enregistrament d'àudio"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+msgid ""
+"Preferred media type for encoding audio when recording. 'audio/x-vorbis' for "
+"Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
+msgstr ""
+"Tipus de format de codificació preferit per a l'enregistrament d'àudio. Per "
+"exemple: «audio/x-vorbis» per Ogg Vorbis o «audio/mpeg» per MP3. Això no és "
+"un tipus MIME."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
 msgid "Maps media types to audio encoder preset names."
 msgstr ""
 "Mapa els tipus de format als noms predeterminats del codificador d'àudio."
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
 msgid ""
-"Maps media types to audio encoder preset names. If there is no mapping set, "
-"the default encoder settings will be used."
+"Maps media types to audio encoder preset names. If there is no mapping for a "
+"media type, the default encoder settings will be used."
 msgstr ""
 "Mapa els tipus de format als noms predeterminats del codificador d'àudio. Si "
-"no hi ha cap mapat, s'utilitzaran els paràmetres per defecte del codificador."
-
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
-msgid "Micophone volume level"
-msgstr "Nivell de volum del micròfon"
-
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
-msgid "Micophone volume level."
-msgstr "Nivell de volum del micròfon."
+"no hi ha mapat per a cap tipus de format, s'utilitzaran els paràmetres per "
+"defecte del codificador."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
-msgid "Speaker volume level"
-msgstr "Nivell de volum de l'altaveu"
+msgid "Volume level"
+msgstr "Nivell de volum"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
-msgid "Speaker volume level."
-msgstr "Nivell de volum de l'altaveu."
+msgid "Volume level."
+msgstr "Nivell de volum."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:153
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:154
 #: ../src/record.js:96
 msgid "Sound Recorder"
 msgstr "Enregistradora de so"
@@ -75,23 +81,23 @@ msgstr "Enregistra un so mitjançant el micròfon i reprodueix-lo"
 msgid "Audio;Application;Record;"
 msgstr "àudio;aplicació;enregistrament;"
 
-#: ../src/application.js:41
+#: ../src/application.js:39
 msgid "SoundRecorder"
 msgstr "Enregistradora de so"
 
-#: ../src/application.js:48 ../src/preferences.js:38
+#: ../src/application.js:46 ../src/preferences.js:38
 msgid "Preferences"
 msgstr "Preferències"
 
-#: ../src/application.js:51
+#: ../src/application.js:49
 msgid "About"
 msgstr "Quant a"
 
-#: ../src/application.js:52
+#: ../src/application.js:50
 msgid "Quit"
 msgstr "Ix"
 
-#: ../src/application.js:81
+#: ../src/application.js:80
 msgid "Sound Recorder started"
 msgstr "S'ha iniciat l'enregistradora de so"
 
@@ -101,7 +107,7 @@ msgid "Recordings"
 msgstr "Enregistraments"
 
 #. Translators: Replace "translator-credits" with your names, one name per line */
-#: ../src/application.js:152
+#: ../src/application.js:153
 msgid "translator-credits"
 msgstr "Pau Iranzo <pau.iranzo@softcatala.org>"
 
@@ -292,7 +298,7 @@ msgstr ""
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
 #. by the application (for example, "Clip 1"). */
-#: ../src/record.js:294
+#: ../src/record.js:300
 #, javascript-format
 msgid "Clip %d"
 msgstr "Retall %d"
