@@ -233,7 +233,6 @@ const Record = new Lang.Class({
                         let dur = s.get_value("duration");
                         let runTime = s.get_value("running-time");
                         peakVal = s.get_value("peak");
-                        
                         if (peakVal) {
                             let val = peakVal.get_nth(0);
                             
