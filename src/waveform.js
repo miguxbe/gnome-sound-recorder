@@ -228,7 +228,7 @@ const WaveForm = new Lang.Class({
 
         if (this.waveType == WaveType.PLAY) {
             lastTime = this.playTime;
-            this.playTime = playTime;
+            this.playTime = Math.floor(playTime);
 
             if (peaks.length < this.playTime) {
                 this.pipeline.set_state(Gst.State.PLAYING);
