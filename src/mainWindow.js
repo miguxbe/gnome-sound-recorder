@@ -609,10 +609,12 @@ const MainView = new Lang.Class({
                     }
                 }));
 
-                if (play.getPipeStates() == PipelineStates.PLAYING || play.getPipeStates()== PipelineStates.PAUSED) {
+                if (play.getPipeStates() == PipelineStates.PLAYING
+                    || play.getPipeStates() == PipelineStates.PAUSED) {
                     play.stopPlaying();
                 }
             }
+
         previousSelRow = null;
     },
 
@@ -666,6 +668,17 @@ const MainView = new Lang.Class({
     _deleteFile: function(selected) {
         let fileToDelete = this._getFileFromRow(selected);
         fileToDelete.trash_async(GLib.PRIORITY_DEFAULT, null, null);
+
+        let revealer = new Gtk.Revealer({ transition_duration: 150,
+                                          transition_type: 3 });
+
+        view.emptyGrid.attach(revealer, 0,0,1,1);
+
+        label = Gtk.Label("Hola");
+        revealer.add(label);
+
+        revealer.set_reveal_child(true);
+
     },
 
     loadPlay: function(selected) {
