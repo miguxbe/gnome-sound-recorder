@@ -36,10 +36,11 @@ const InfoDialog = new Lang.Class({
 
         this._file = Gio.File.new_for_uri(fileNav.uri);
 
-        this.widget = new Gtk.Dialog ({ resizable: false,
-                                        modal: true,
-                                        destroy_with_parent: true,
-                                        default_width: 400 });
+        this.widget = new Gtk.Dialog({ resizable: false,
+                                       modal: true,
+                                       destroy_with_parent: true,
+                                       default_width: 400 });
+
         this.widget.set_transient_for(Gio.Application.get_default().get_active_window());
         let header = new Gtk.HeaderBar({ title: _("Info") });
         header.set_show_close_button(false);
@@ -60,16 +61,16 @@ const InfoDialog = new Lang.Class({
         headerBarSizeGroup.add_widget(cancelButton);
         headerBarSizeGroup.add_widget(doneButton);
 
-        let grid = new Gtk.Grid ({ orientation: Gtk.Orientation.VERTICAL,
-                                   row_homogeneous: true,
-                                   column_homogeneous: true,
-                                   halign: Gtk.Align.CENTER,
-                                   row_spacing: 6,
-                                   column_spacing: 12,
-                                   margin_bottom: 18,
-                                   margin_end: 18,
-                                   margin_start: 18,
-                                   margin_top: 18 });
+        let grid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
+                                  row_homogeneous: true,
+                                  column_homogeneous: true,
+                                  halign: Gtk.Align.CENTER,
+                                  row_spacing: 6,
+                                  column_spacing: 12,
+                                  margin_bottom: 18,
+                                  margin_end: 18,
+                                  margin_start: 18,
+                                  margin_top: 18 });
 
         let contentArea = this.widget.get_content_area();
         contentArea.pack_start(grid, true, true, 2);
@@ -79,14 +80,14 @@ const InfoDialog = new Lang.Class({
         // in the info dialog
         this._name = new Gtk.Label({ label: C_("File Name", "Name"),
                                      halign: Gtk.Align.END });
-        this._name.get_style_context ().add_class('dim-label');
+        this._name.get_style_context().add_class('dim-label');
         grid.add(this._name);
 
 
         // Source item
         this._source = new Gtk.Label({ label: _("Source"),
                                        halign: Gtk.Align.END });
-        this._source.get_style_context ().add_class('dim-label');
+        this._source.get_style_context().add_class('dim-label');
 
         if (fileName.appName != null) {
             grid.add(this._source);
@@ -95,13 +96,13 @@ const InfoDialog = new Lang.Class({
         // Date Modified item
         this._dateModifiedLabel = new Gtk.Label({ label: _("Date Modified"),
                                                   halign: Gtk.Align.END });
-        this._dateModifiedLabel.get_style_context ().add_class('dim-label');
+        this._dateModifiedLabel.get_style_context().add_class('dim-label');
         grid.add(this._dateModifiedLabel);
 
         // Date Created item
         this._dateCreatedLabel = new Gtk.Label({ label: _("Date Created"),
                                                  halign: Gtk.Align.END });
-        this._dateCreatedLabel.get_style_context ().add_class('dim-label');
+        this._dateCreatedLabel.get_style_context().add_class('dim-label');
 
         if (fileName.dateCreated != null) {
             grid.add(this._dateCreatedLabel);
@@ -112,7 +113,7 @@ const InfoDialog = new Lang.Class({
         // (Ogg Vorbis, AAC, ...) in the info dialog
         this._mediaType = new Gtk.Label({ label: C_("Media Type", "Type"),
                                           halign: Gtk.Align.END });
-        this._mediaType.get_style_context ().add_class('dim-label');
+        this._mediaType.get_style_context().add_class('dim-label');
         grid.add(this._mediaType);
 
         // File name value

@@ -111,7 +111,7 @@ const Record = new Lang.Class({
                             element.merge_tags(this.taglist, Gst.TagMergeMode.REPLACE);
                             this.taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_DATE_TIME, this.gstreamerDateTime);
                             element.merge_tags(this.taglist, Gst.TagMergeMode.REPLACE);
-                    }
+                        }
                 }
             }));
         this.pipeline.add(this.ebin);
@@ -144,11 +144,10 @@ const Record = new Lang.Class({
     },
 
     _updateTime: function() {
-        let time = this.pipeline.query_position(Gst.Format.TIME, null)[1]/Gst.SECOND;
+        let time = this.pipeline.query_position(Gst.Format.TIME, null)[1] / Gst.SECOND;
 
-        if (time >= 0) {
+        if (time >= 0)
             this._view.setLabel(time, 0);
-        }
 
         return true;
     },
@@ -163,7 +162,7 @@ const Record = new Lang.Class({
             errorDialogState = ErrState.ON;
         }
 
-        if (!this.pipeline || this.pipeState == PipelineStates.STOPPED )
+        if (!this.pipeline || this.pipeState == PipelineStates.STOPPED)
             this._recordPipeline();
 
         let ret = this.pipeline.set_state(Gst.State.PLAYING);
@@ -177,9 +176,9 @@ const Record = new Lang.Class({
             MainWindow.view.setVolume();
         }
 
-        if (!this.timeout) {
+        if (!this.timeout)
             this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, MainWindow._SEC_TIMEOUT, Lang.bind(this, this._updateTime));
-        }
+
     },
 
     stopRecording: function() {
@@ -244,7 +243,7 @@ const Record = new Lang.Class({
 
                             if (val > 0)
 			                    val = 0;
-                            let value = Math.pow(10, val/20);
+                            let value = Math.pow(10, val / 20);
                             this.peak = value;
 
 
@@ -262,11 +261,11 @@ const Record = new Lang.Class({
                                 this.baseTime = this.absoluteTime;
 
                             this.runTime = this.absoluteTime- this.baseTime;
-                            let approxTime = Math.round(this.runTime/_TENTH_SEC);
+                            let approxTime = Math.round(this.runTime / _TENTH_SEC);
                             MainWindow.wave._drawEvent(approxTime, this.peak);
-                            }
                         }
                     }
+                }
             break;
 
         case Gst.MessageType.EOS:
@@ -287,20 +286,19 @@ const Record = new Lang.Class({
     },
 
     setVolume: function(value) {
-        if (this.volume) {
+        if (this.volume)
             this.volume.set_volume(GstAudio.StreamVolumeFormat.CUBIC, value);
-        }
+
     },
 
     _showErrorDialog: function(errorStrOne, errorStrTwo) {
         if (errorDialogState == ErrState.OFF) {
-            let errorDialog = new Gtk.MessageDialog ({ modal: true,
-                                                       destroy_with_parent: true,
-                                                       buttons: Gtk.ButtonsType.OK,
-                                                       message_type: Gtk.MessageType.WARNING });
-            if (errorStrOne != null) {
+            let errorDialog = new Gtk.MessageDialog({ modal: true,
+                                                      destroy_with_parent: true,
+                                                      buttons: Gtk.ButtonsType.OK,
+                                                      message_type: Gtk.MessageType.WARNING });
+            if (errorStrOne != null)
                 errorDialog.set_property("text", errorStrOne);
-            }
 
             if (errorStrTwo != null)
                 errorDialog.set_property("secondary-text", errorStrTwo);

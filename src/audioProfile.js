@@ -36,7 +36,7 @@ const comboBoxMap = {
 };
 
 const containerProfileMap = {
-    OGG: "application/ogg", 
+    OGG: "application/ogg",
     ID3: "application/x-id3",
     MP4: "video/quicktime,variant=(string)iso",
     AUDIO_OGG: "application/ogg;audio/ogg;video/ogg"
@@ -44,56 +44,56 @@ const containerProfileMap = {
 
 
 const audioCodecMap = {
-    FLAC: "audio/x-flac",      
+    FLAC: "audio/x-flac",
     MP3: "audio/mpeg,mpegversion=(int)1,layer=(int)3",
     MP4: "audio/mpeg,mpegversion=(int)4",
-    OPUS: "audio/x-opus", 
+    OPUS: "audio/x-opus",
     VORBIS: "audio/x-vorbis"
 };
 
 
 const AudioProfile = new Lang.Class({
     Name: 'AudioProfile',
-   
+
     profile: function(profileName){
         if (profileName)
-            this._profileName = profileName;
-       else 
-            this._profileName = comboBoxMap.OGG_VORBIS;
-            
+           this._profileName = profileName;
+        else
+           this._profileName = comboBoxMap.OGG_VORBIS;
+
         this._values = [];
         switch(this._profileName) {
-                             
+
         case comboBoxMap.OGG_VORBIS:
             this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.VORBIS });
             break;
-            
+
         case comboBoxMap.OPUS:
-            this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.OPUS }); 
+            this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.OPUS });
             break;
-            
+
         case comboBoxMap.FLAC:
             this._values.push({ audio: audioCodecMap.FLAC });
             break;
-            
+
         case comboBoxMap.MP3:
             this._values.push({ container: containerProfileMap.ID3, audio: audioCodecMap.MP3 });
             break;
-            
+
         case comboBoxMap.MP4:
             this._values.push({ container: containerProfileMap.MP4, audio: audioCodecMap.MP4 });
             break;
-            
+
         default:
             break;
         }
     },
-       
+
     mediaProfile: function(){
         let idx = 0;
-        let audioCaps; 
+        let audioCaps;
         this._containerProfile = null;
-               
+
         if (this._values[idx].container) {
             let caps = Gst.Caps.from_string(this._values[idx].container);
             this._containerProfile = GstPbutils.EncodingContainerProfile.new("record", null, caps, null);
@@ -105,24 +105,24 @@ const AudioProfile = new Lang.Class({
             audioCaps = Gst.Caps.from_string(this._values[idx].audio);
             this.encodingProfile = GstPbutils.EncodingAudioProfile.new(audioCaps, null, null, 1);
             return this.encodingProfile;
-        } else {
-            return -1; 
-        }    
+        }
+
+        return -1;
     },
-    
+
     fileExtensionReturner: function() {
         let idx = 0;
         let suffixName;
-        
+
         if (this._values[idx].audio) {
             if (this._containerProfile != null)
                 suffixName = this._containerProfile.get_file_extension();
-            
-            if (suffixName == null) 
+
+            if (suffixName == null)
                 suffixName = this.encodingProfile.get_file_extension();
-        }  
-        
+        }
+
         this.audioSuffix = ("." + suffixName);
-        return this.audioSuffix;   
+        return this.audioSuffix;
     }
 });

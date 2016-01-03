@@ -21,7 +21,7 @@
 const _ = imports.gettext.gettext;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
-const GObject = imports.gi.GObject; 
+const GObject = imports.gi.GObject;
 const Gst = imports.gi.Gst;
 const GstPbutils = imports.gi.GstPbutils;
 const Lang = imports.lang;
@@ -31,10 +31,10 @@ const AudioProfile = imports.audioProfile;
 const MainWindow = imports.mainWindow;
 const Record = imports.record;
 
-const EnumeratorState = { 
+const EnumeratorState = {
     ACTIVE: 0,
     CLOSED: 1
-}; 
+};
 
 const mediaTypeMap = {
     FLAC: "FLAC",
@@ -55,10 +55,10 @@ const CurrentlyEnumerating = {
 };
 
 let allFilesInfo = null;
-let currentlyEnumerating = null; 
+let currentlyEnumerating = null;
 let fileInfo = null;
 let listType = null;
-let startRecording = false; 
+let startRecording = false;
 let stopVal = null;
 let trackNumber = 0;
 
@@ -77,31 +77,31 @@ const Listview = new Lang.Class({
         this.dirMonitor = this._saveDir.monitor_directory(Gio.FileMonitorFlags.NONE, null);
         this.dirMonitor.connect('changed', this._onDirChanged);
     },
-            
+
     enumerateDirectory: function() {
         this._saveDir.enumerate_children_async('standard::display-name,time::created,time::modified',
-                                     Gio.FileQueryInfoFlags.NONE,
-                                     GLib.PRIORITY_LOW, 
-                                     null, Lang.bind(this, 
-                                     this._onEnumerator)); 
-    },  
-           
-    _onEnumerator: function(obj, res) {             
+                                                Gio.FileQueryInfoFlags.NONE,
+                                                GLib.PRIORITY_LOW,
+                                                null, Lang.bind(this,
+                                                this._onEnumerator));
+    },
+
+    _onEnumerator: function(obj, res) {
         this._enumerator = obj.enumerate_children_finish(res);
-        
+
         if (this._enumerator == null)
             log("The contents of the Recordings directory were not indexed.");
-        else   
-            this._onNextFileComplete(); 
+        else
+            this._onNextFileComplete();
     },
-    
+
     _onNextFileComplete: function () {
         fileInfo = [];
         try{
             this._enumerator.next_files_async(20, GLib.PRIORITY_DEFAULT, null, Lang.bind(this,
                 function(obj, res) {
                     let files = obj.next_files_finish(res);
-                    
+
                     if (files.length) {
                         files.forEach(Lang.bind(this,
                             function(file) {
@@ -125,12 +125,12 @@ const Listview = new Lang.Class({
                                     let dateCreatedVal = file.get_attribute_uint64("time::created");
                                     let dateCreated = GLib.DateTime.new_from_timeval_local(dateCreatedVal);
                                     this.dateCreatedString = dateCreated.format(_("%Y-%m-%d %H:%M:%S"));
-                                } 
-                       
-                                fileInfo = 
+                                }
+
+                                fileInfo =
                                     fileInfo.concat({ appName: null,
-                                                      dateCreated: null, 
-                                                      dateForSort: dateModifiedSortString,                
+                                                      dateCreated: null,
+                                                      dateForSort: dateModifiedSortString,
                                                       dateModified: dateModifiedDisplayString,
                                                       duration: null,
                                                       fileName: returnedName,
@@ -142,7 +142,7 @@ const Listview = new Lang.Class({
                     } else {
                         stopVal = EnumeratorState.CLOSED;
                         this._enumerator.close(null);
-                        
+
                         if (MainWindow.offsetController.getEndIdx() == -1) {
                              if (listType == ListType.NEW) {
                                 MainWindow.view.listBoxAdd();
@@ -152,36 +152,36 @@ const Listview = new Lang.Class({
                             }
                             currentlyEnumerating = CurrentlyEnumerating.FALSE;
                         } else {
-                            
-                        this._setDiscover();
-                        }                       
+                            this._setDiscover();
+                        }
+
                         return;
-                   }                    
+                   }
                 }));
         } catch(e) {
             log(e);
         }
-    }, 
-    
-    _sortItems: function(fileArr) {      
+    },
+
+    _sortItems: function(fileArr) {
         this._fileArr = fileArr;
         allFilesInfo = allFilesInfo.concat(this._fileArr);
         allFilesInfo.sort(function(a, b) {
-            return b.dateForSort - a.dateForSort; 
-        }); 
+            return b.dateForSort - a.dateForSort;
+        });
 
         if (stopVal == EnumeratorState.ACTIVE) {
-            this._onNextFileComplete(); 
-        } 
-    }, 
-    
+            this._onNextFileComplete();
+        }
+    },
+
     getItemCount: function() {
         return allFilesInfo.length;
     },
-       
+
     _setDiscover: function() {
         this._controller = MainWindow.offsetController;
-        this.endIdx = this._controller.getEndIdx(); 
+        this.endIdx = this._controller.getEndIdx();
         this.idx = 0;
         this._discoverer = new GstPbutils.Discoverer();
         this._discoverer.start();
@@ -192,76 +192,75 @@ const Listview = new Lang.Class({
         }
         this._runDiscover();
      },
-     
+
      _runDiscover: function() {
-          this._discoverer.connect('discovered', Lang.bind(this, 
+          this._discoverer.connect('discovered', Lang.bind(this,
             function(_discoverer, info, error) {
                 let result = info.get_result();
-                this._onDiscovererFinished(result, info, error); 
-             })); 
+                this._onDiscovererFinished(result, info, error);
+             }));
     },
-                        
+
     _onDiscovererFinished: function(res, info, err) {
         this.result = res;
-        if (this.result == GstPbutils.DiscovererResult.OK && allFilesInfo[this.idx]) { 
+        if (this.result == GstPbutils.DiscovererResult.OK && allFilesInfo[this.idx]) {
             this.tagInfo = info.get_tags(info);
             let appString = "";
-            let dateTimeCreatedString = ""; 
+            let dateTimeCreatedString = "";
             appString = this.tagInfo.get_value_index(Gst.TAG_APPLICATION_NAME, 0);
-            let dateTimeTag = this.tagInfo.get_date_time('datetime')[1]; 
+            let dateTimeTag = this.tagInfo.get_date_time('datetime')[1];
             let title = this.tagInfo.get_string('title')[1];
             let durationInfo = info.get_duration();
-            allFilesInfo[this.idx].duration = durationInfo;           
-             
-            /* this.file.dateCreated will usually be null since time::created it doesn't usually exist. 
+            allFilesInfo[this.idx].duration = durationInfo;
+
+            /* this.file.dateCreated will usually be null since time::created it doesn't usually exist.
                Therefore, we prefer to set it with tags */
-            if (dateTimeTag != null) {                
+            if (dateTimeTag != null) {
                 dateTimeCreatedString = dateTimeTag.to_g_date_time();
-                
+
                 if (dateTimeCreatedString) {
-                    allFilesInfo[this.idx].dateCreated = dateTimeCreatedString.format(_("%Y-%m-%d %H:%M:%S")); 
+                    allFilesInfo[this.idx].dateCreated = dateTimeCreatedString.format(_("%Y-%m-%d %H:%M:%S"));
                 } else if (this.dateCreatedString) {
                     allFilesInfo[this.idx].dateCreated = this.dateCreatedString;
                 }
-            }              
-            
+            }
+
             if (appString == GLib.get_application_name()) {
                 allFilesInfo[this.idx].appName = appString;
             }
-            
+
             this._getCapsForList(info);
         } else {
             // don't index files we can't play
             allFilesInfo.splice(this.idx, 1);
             log("File cannot be played");
         }
-        
-        if (this.idx == this.endIdx) { 
+
+        if (this.idx == this.endIdx) {
             this._discoverer.stop();
             if (listType == ListType.NEW) {
                 MainWindow.view.listBoxAdd();
                 MainWindow.view.scrolledWinAdd();
-                currentlyEnumerating = CurrentlyEnumerating.FALSE;
             } else if (listType == ListType.REFRESH){
                 MainWindow.view.scrolledWinDelete();
-                currentlyEnumerating = CurrentlyEnumerating.FALSE;
             }
-            //return false; 
-        }         
-        this.idx++;                            
+
+            currentlyEnumerating = CurrentlyEnumerating.FALSE;
+        }
+        this.idx++;
     },
-    
+
     setListTypeNew: function() {
         listType = ListType.NEW;
-    }, 
-    
+    },
+
     setListTypeRefresh: function() {
         listType = ListType.REFRESH;
     },
-        
+
     _onDirChanged: function(dirMonitor, file1, file2, eventType) {
-        if ((eventType == Gio.FileMonitorEvent.DELETED && !Gio.Application.get_default().saveDir.equal(file1)) || 
-            (eventType == Gio.FileMonitorEvent.CHANGES_DONE_HINT 
+        if ((eventType == Gio.FileMonitorEvent.DELETED && !Gio.Application.get_default().saveDir.equal(file1)) ||
+            (eventType == Gio.FileMonitorEvent.CHANGES_DONE_HINT
                 && MainWindow.recordPipeline == MainWindow.RecordPipelineStates.STOPPED)) {
             stopVal = EnumeratorState.ACTIVE;
             allFilesInfo.length = 0;
@@ -273,17 +272,17 @@ const Listview = new Lang.Class({
                 MainWindow.view.listBoxRefresh();
             }
         }
-        
+
         else if (eventType == Gio.FileMonitorEvent.CREATED) {
             startRecording = true;
         }
-          
+
         else if (eventType == Gio.FileMonitorEvent.DELETED && Gio.Application.get_default().saveDir.equal(file1)) {
-            Gio.Application.get_default().ensure_directory(); 
-            this._saveDir = Gio.Application.get_default().saveDir; 
-        }  
+            Gio.Application.get_default().ensure_directory();
+            this._saveDir = Gio.Application.get_default().saveDir;
+        }
     },
-    
+
     _getCapsForList: function(info) {
         let discovererStreamInfo = null;
         discovererStreamInfo = info.get_stream_info();
@@ -293,41 +292,40 @@ const Listview = new Lang.Class({
         let audioCaps =  audioStreams.get_caps();
 
         if (containerCaps.can_intersect(this.capTypes(AudioProfile.containerProfileMap.AUDIO_OGG))) {
-   
+
             if (audioCaps.can_intersect(this.capTypes(AudioProfile.audioCodecMap.VORBIS)))
                 allFilesInfo[this.idx].mediaType = mediaTypeMap.OGG_VORBIS;
             else if (audioCaps.can_intersect(this.capTypes(AudioProfile.audioCodecMap.OPUS)))
                 allFilesInfo[this.idx].mediaType = mediaTypeMap.OPUS;
 
         } else if (containerCaps.can_intersect(this.capTypes(AudioProfile.containerProfileMap.ID3))) {
-        
+
             if (audioCaps.can_intersect(this.capTypes(AudioProfile.audioCodecMap.MP3)))
                 allFilesInfo[this.idx].mediaType = mediaTypeMap.MP3;
 
         } else if (containerCaps.can_intersect(this.capTypes(AudioProfile.containerProfileMap.MP4))) {
-        
+
             if (audioCaps.can_intersect(this.capTypes(AudioProfile.audioCodecMap.MP4)))
-                allFilesInfo[this.idx].mediaType = mediaTypeMap.MP4;              
+                allFilesInfo[this.idx].mediaType = mediaTypeMap.MP4;
 
         } else if (audioCaps.can_intersect(this.capTypes(AudioProfile.audioCodecMap.FLAC))) {
             allFilesInfo[this.idx].mediaType = mediaTypeMap.FLAC;
-                      
-        } 
-        
+
+        }
+
         if (allFilesInfo[this.idx].mediaType == null) {
-                // Remove the file from the array if we don't recognize it    
-                allFilesInfo.splice(this.idx, 1);    
-        }      
+                // Remove the file from the array if we don't recognize it
+                allFilesInfo.splice(this.idx, 1);
+        }
     },
 
     capTypes: function(capString) {
     	let caps = Gst.Caps.from_string(capString);
     	return caps;
     },
-        
+
     getFilesInfoForList: function() {
         return allFilesInfo;
-    }        
+    }
 });
-
 

@@ -185,21 +185,18 @@ const MainView = new Lang.Class({
                     if (child.name == "PauseButton") {
                         child.hide();
                         child.sensitive = false;
-                    }
-                    else if (child.name == "PlayLabelBox") {
+                    } else if (child.name == "PlayLabelBox") {
                         child.show();
                         child.foreach(Lang.bind(this,
                             function(grandchild) {
 
-                                if (grandchild.name == "PlayTimeLabel") {
+                                if (grandchild.name == "PlayTimeLabel")
                                     grandchild.hide();
-                                }
 
                                 if (grandchild.name == "DividerLabel" )
                                     grandchild.hide();
                              }));
-                    }
-                    else {
+                    } else {
                         child.show();
                         child.sensitive = true;
                     }
@@ -220,7 +217,7 @@ const MainView = new Lang.Class({
         this.unformattedTime = unformattedTime;
         let seconds = Math.floor(this.unformattedTime);
         let hours = parseInt(seconds / Math.pow(_TIME_DIVISOR, 2));
-        let hoursString = ""
+        let hoursString = "";
 
         if (hours > 10)
             hoursString = hours + ":"
@@ -241,9 +238,9 @@ const MainView = new Lang.Class({
     _updatePositionCallback: function() {
         let position = MainWindow.play.queryPosition();
 
-        if (position >= 0) {
+        if (position >= 0)
             this.progressScale.set_value(position);
-        }
+
         return true;
     },
 
@@ -298,6 +295,7 @@ const MainView = new Lang.Class({
                                                margin_end: 6,
                                                margin_start: 6,
                                                margin_top: 6 });
+
         this.recordTextLabel.label = _("Recording…");
         this._boxRecord.pack_start(this.recordTextLabel, false, true, 0);
 
@@ -320,6 +318,7 @@ const MainView = new Lang.Class({
                                           margin_end: 6,
                                           margin_start: 6,
                                           margin_top: 6 });
+
         stopRecord.get_style_context().add_class('text-button');
         stopRecord.connect("clicked", Lang.bind(this, this.onRecordStopClicked));
         this.toolbarStart.pack_start(stopRecord, true, true, 0);
@@ -347,15 +346,14 @@ const MainView = new Lang.Class({
         this.groupGrid.add(this._scrolledWin);
         this._scrolledWin.show();
         let sounds = list.getItemCount();
-        let title;
+        let title = "";
         // Translators: This is the title in the headerbar
         if (sounds > 0) {
             title = Gettext.ngettext("%d Recorded Sound",
                                      "%d Recorded Sounds",
                                       sounds).format(sounds);
-        } else {
-            title = "";
         }
+
         header.set_title(title);
 
         this.listBox = null;
@@ -386,6 +384,7 @@ const MainView = new Lang.Class({
                                               orientation: Gtk.Orientation.VERTICAL,
                                               hexpand: true,
                                               vexpand: true });
+
                 this.rowGrid.set_orientation(Gtk.Orientation.HORIZONTAL);
                 this.listBox.add(this.rowGrid);
                 this.rowGrid.show();
@@ -439,6 +438,7 @@ const MainView = new Lang.Class({
                                                  use_markup: true,
                                                  width_chars: 35,
                                                  xalign: 0 });
+
                 let markup = ('<b>'+ this._files[i].fileName + '</b>');
                 this._fileName.label = markup;
                 this._fileName.set_no_show_all(true);
@@ -450,12 +450,14 @@ const MainView = new Lang.Class({
                                                    height_request: 45 });
                 this.rowGrid.attach(this._playLabelBox, 3, 1, 5, 1);
                 this._playLabelBox.show();
+
                 this.playDurationLabel = new Gtk.Label({ name: "PlayDurationLabel",
                                                          halign: Gtk.Align.END,
                                                          valign: Gtk.Align.END,
                                                          margin_start: 15,
                                                          margin_top: 5 });
-                this.fileDuration = this._formatTime(this._files[i].duration/Gst.SECOND);
+
+                this.fileDuration = this._formatTime(this._files[i].duration / Gst.SECOND);
                 this.playDurationLabel.label = this.fileDuration;
                 this._playLabelBox.pack_start(this.playDurationLabel, false, true, 0);
                 this.playDurationLabel.show();
@@ -483,6 +485,7 @@ const MainView = new Lang.Class({
                                                          valign: Gtk.Align.END,
                                                          margin_start: 15,
                                                          margin_top: 5 });
+
                 this.dateModifiedLabel.label = this._files[i].dateModified;
                 this.dateModifiedLabel.get_style_context().add_class('dim-label');
                 this.dateModifiedLabel.set_no_show_all(true);
@@ -520,7 +523,7 @@ const MainView = new Lang.Class({
                 // delete button
                 this._delete = new Gtk.Button({ name: "DeleteButton",
                                                 hexpand: false,
-                                                margin_start: 2, });
+                                                margin_start: 2 });
                 this._delete.image = Gtk.Image.new_from_icon_name("user-trash-symbolic", Gtk.IconSize.BUTTON);
                 this._delete.connect("clicked", Lang.bind(this,
                     function(button) {
@@ -533,6 +536,7 @@ const MainView = new Lang.Class({
                 this._delete.hide();
             }
         }
+
         list.monitorListview();
     },
 
@@ -554,9 +558,8 @@ const MainView = new Lang.Class({
         this.destroyLoadMoreButton();
         previousSelRow = null;
 
-        if (this.listBox) {
+        if (this.listBox)
             this.listBox.set_selection_mode(Gtk.SelectionMode.NONE);
-        }
 
         list.setListTypeRefresh();
         list.enumerateDirectory();
@@ -591,6 +594,7 @@ const MainView = new Lang.Class({
                         child.hide();
                         child.sensitive = false;
                     }
+
                     if (child.name == "PlayButton") {
                         child.show();
                         child.sensitive = true;
@@ -601,20 +605,18 @@ const MainView = new Lang.Class({
                         child.foreach(Lang.bind(this,
                             function(grandchild) {
 
-                                if (grandchild.name == "PlayTimeLabel") {
+                                if (grandchild.name == "PlayTimeLabel" || grandchild.name == "DividerLabel")
                                     grandchild.hide();
-                                }
 
-                                if (grandchild.name == "DividerLabel" )
-                                    grandchild.hide();
                              }));
                     }
                 }));
 
-                if (play.getPipeStates() == PipelineStates.PLAYING || play.getPipeStates()== PipelineStates.PAUSED) {
+                if (play.getPipeStates() == PipelineStates.PLAYING || play.getPipeStates() == PipelineStates.PAUSED)
                     play.stopPlaying();
-                }
-            }
+
+           }
+
         previousSelRow = null;
     },
 
@@ -624,9 +626,8 @@ const MainView = new Lang.Class({
 
         if (selectedRow) {
 
-            if (previousSelRow != null) {
+            if (previousSelRow != null)
                 this.hasPreviousSelRow();
-            }
 
             previousSelRow = selectedRow;
             let selectedRowWidget = previousSelRow.get_child(this.widget);
@@ -731,8 +732,8 @@ const MainView = new Lang.Class({
             rowWidget.foreach(Lang.bind(this,
                 function(child) {
 
-                    if (child.name == "InfoButton" || child.name == "DeleteButton" ||
-                        child.name == "PlayButton" ) {
+                    if (child.name == "InfoButton" || child.name == "DeleteButton"
+                        || child.name == "PlayButton" ) {
                         child.hide();
                         child.sensitive = false;
                     }
@@ -746,9 +747,8 @@ const MainView = new Lang.Class({
                         child.foreach(Lang.bind(this,
                             function(grandchild) {
 
-                                if (grandchild.name == "PlayTimeLabel") {
+                                if (grandchild.name == "PlayTimeLabel")
                                     view.playTimeLabel = grandchild;
-                                }
 
                                 if (grandchild.name == "DividerLabel" )
                                     grandchild.show();
@@ -786,11 +786,10 @@ const RecordButton = new Lang.Class({
         view.destroyLoadMoreButton();
         view.hasPreviousSelRow();
 
-        if (view.listBox) {
+        if (view.listBox)
             view.listBox.set_selection_mode(Gtk.SelectionMode.NONE);
-        } else {
+        else
             view.emptyGrid.destroy();
-        }
 
         this.set_sensitive(false);
         setVisibleID = ActiveArea.RECORD;
@@ -814,8 +813,9 @@ const EncoderComboBox = new Lang.Class({
         this.parent();
         let combo = [_("Ogg Vorbis"), _("Opus"), _("FLAC"), _("MP3"), _("MOV")];
 
-        for (let i = 0; i < combo.length; i++)
+        for (let i in combo)
             this.append_text(combo[i]);
+
         this.set_property('valign', Gtk.Align.CENTER);
         this.set_sensitive(true);
         activeProfile = Application.application.getPreferences();

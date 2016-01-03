@@ -72,7 +72,7 @@ const Play = new Lang.Class({
     startPlaying: function() {
         this.baseTime = 0;
 
-        if (!this.play || this.playState == PipelineStates.STOPPED ) {
+        if (!this.play || this.playState == PipelineStates.STOPPED) {
             this._playPipeline();
         }
 
@@ -91,6 +91,7 @@ const Play = new Lang.Class({
         } else if (this.ret == Gst.StateChangeReturn.SUCCESS) {
             MainWindow.view.setVolume();
         }
+
         GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGINT, Application.application.onWindowDestroy, this.play);
         GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGTERM, Application.application.onWindowDestroy, this.play);
     },
@@ -182,10 +183,11 @@ const Play = new Lang.Class({
         this.trackDuration = this.play.query_duration(Gst.Format.TIME, null)[1];
         this.trackDurationSecs = this.trackDuration/Gst.SECOND;
 
-        if (time >= 0 && this.playState != PipelineStates.STOPPED) {
-            MainWindow.view.setLabel(time);
-        } else if (time >= 0 && this.playState == PipelineStates.STOPPED) {
-            MainWindow.view.setLabel(0);
+        if (time >= 0) {
+            if (this.playState == PipelineStates.STOPPED)
+                MainWindow.view.setLabel(0);
+            else
+                MainWindow.view.setLabel(time);
         }
 
         let absoluteTime = 0;
@@ -202,8 +204,8 @@ const Play = new Lang.Class({
         if (this.baseTime == 0)
             this.baseTime = absoluteTime;
 
-        this.runTime = absoluteTime- this.baseTime;
-        let approxTime = Math.round(this.runTime/_TENTH_SEC);
+        this.runTime = absoluteTime - this.baseTime;
+        let approxTime = Math.round(this.runTime / _TENTH_SEC);
 
         if (MainWindow.wave != null) {
             MainWindow.wave._drawEvent(approxTime);
@@ -215,7 +217,7 @@ const Play = new Lang.Class({
     queryPosition: function() {
         let position = 0;
         while (position == 0) {
-            position = this.play.query_position(Gst.Format.TIME, null)[1]/Gst.SECOND;
+            position = this.play.query_position(Gst.Format.TIME, null)[1] / Gst.SECOND;
         }
 
         return position;
@@ -239,9 +241,9 @@ const Play = new Lang.Class({
 
     _showErrorDialog: function(errorStrOne, errorStrTwo) {
         if (errorDialogState == ErrState.OFF) {
-            let errorDialog = new Gtk.MessageDialog ({ destroy_with_parent: true,
-                                                       buttons: Gtk.ButtonsType.OK,
-                                                       message_type: Gtk.MessageType.WARNING });
+            let errorDialog = new Gtk.MessageDialog({ destroy_with_parent: true,
+                                                      buttons: Gtk.ButtonsType.OK,
+                                                      message_type: Gtk.MessageType.WARNING });
 
             if (errorStrOne != null)
                 errorDialog.set_property('text', errorStrOne);

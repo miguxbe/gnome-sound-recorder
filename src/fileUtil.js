@@ -48,22 +48,22 @@ const OffsetController = new Lang.Class({
     getOffset: function() {
         return this._offset;
     },
-    
+
     getEndIdx: function() {
         totItems = MainWindow.list.getItemCount();
         if (CurrentEndIdx < totItems) {
-            this.endIdx = CurrentEndIdx -1;
+            this.endIdx = CurrentEndIdx - 1;
         } else {
             this.endIdx = totItems - 1;
         }
-        
+
         return this.endIdx;
     },
-    
+
     increaseEndIdxStep: function() {
         CurrentEndIdx += _OFFSET_STEP;
     },
-    
+
     getcidx: function() {
         return CurrentEndIdx;
     }
@@ -71,7 +71,7 @@ const OffsetController = new Lang.Class({
 
 const DisplayTime = new Lang.Class({
     Name: 'DisplayTime',
-    
+
     getDisplayTime: function(timeVal) {
         let text = "";
         let DAY = 86400000000;
@@ -110,8 +110,8 @@ const DisplayTime = new Lang.Class({
                                     "%d years ago",
                                     years).format(years);
         }
+
         return text;
     }
-});    
-
+});
 
