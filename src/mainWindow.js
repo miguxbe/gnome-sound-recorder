@@ -52,6 +52,7 @@ let play = null;
 let previousSelRow = null;
 let recordPipeline = null;
 let recordButton = null;
+let searchButton = null;
 let selectable = null;
 let setVisibleID = null;
 let UpperBoundVal = 182;
@@ -112,7 +113,10 @@ const MainWindow = new Lang.Class({
 
         recordButton = new RecordButton({ label: _("Record") });
         recordButton.get_style_context().add_class('destructive-action');
+
+        searchButton = new SearchButton({ label: "Search" });
         header.pack_start(recordButton);
+        header.pack_end(searchButton);
 
         this.add(view);
         this.show_all();
@@ -765,6 +769,41 @@ const MainView = new Lang.Class({
             }
         }
     }
+});
+
+const SearchButton = new Lang.Class({
+    Name: "SearchButton",
+    Extends: Gtk.Button,
+
+    _init: function(activeProfile) {
+        this.parent();
+        this.image = Gtk.Image.new_from_icon_name('system-search-symbolic', Gtk.IconSize.BUTTON);
+        this.set_always_show_image(true);
+        this.set_valign(Gtk.Align.CENTER);
+        //this.connect("clicked", Lang.bind(this, this._onRecord));
+    },
+
+    //_onSearch: function() {
+    //    view.destroyLoadMoreButton();
+    //    view.hasPreviousSelRow();
+
+    //    if (view.listBox) {
+    //        view.listBox.set_selection_mode(Gtk.SelectionMode.NONE);
+    //    } else {
+    //        view.emptyGrid.destroy();
+    //    }
+
+    //    this.set_sensitive(false);
+    //    setVisibleID = ActiveArea.RECORD;
+    //    view.recordGrid.show_all();
+
+    //    if (activeProfile == null)
+    //        activeProfile = 0;
+
+    //    audioProfile.profile(activeProfile);
+    //    view._record.startRecording(activeProfile);
+    //    wave = new Waveform.WaveForm(view.recordGrid);
+    //}
 });
 
 const RecordButton = new Lang.Class({
