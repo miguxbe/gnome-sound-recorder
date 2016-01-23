@@ -780,30 +780,33 @@ const SearchButton = new Lang.Class({
         this.image = Gtk.Image.new_from_icon_name('system-search-symbolic', Gtk.IconSize.BUTTON);
         this.set_always_show_image(true);
         this.set_valign(Gtk.Align.CENTER);
-        //this.connect("clicked", Lang.bind(this, this._onRecord));
+        this.connect("clicked", Lang.bind(this, this._showSearchBox));
     },
 
-    //_onSearch: function() {
-    //    view.destroyLoadMoreButton();
-    //    view.hasPreviousSelRow();
+    _showSearchBox: function() {
 
-    //    if (view.listBox) {
-    //        view.listBox.set_selection_mode(Gtk.SelectionMode.NONE);
-    //    } else {
-    //        view.emptyGrid.destroy();
-    //    }
+        searchBox = new SearchBox({show_close_button: true });
 
-    //    this.set_sensitive(false);
-    //    setVisibleID = ActiveArea.RECORD;
-    //    view.recordGrid.show_all();
+        view.destroyLoadMoreButton();
+        view.hasPreviousSelRow();
 
-    //    if (activeProfile == null)
-    //        activeProfile = 0;
+        if (view.listBox) {
+            view.listBox.set_selection_mode(Gtk.SelectionMode.NONE);
+        } else {
+            view.emptyGrid.destroy();
+        }
 
-    //    audioProfile.profile(activeProfile);
-    //    view._record.startRecording(activeProfile);
-    //    wave = new Waveform.WaveForm(view.recordGrid);
-    //}
+        this.set_sensitive(false);
+        setVisibleID = ActiveArea.RECORD;
+        view.recordGrid.show_all();
+
+        if (activeProfile == null)
+            activeProfile = 0;
+
+        audioProfile.profile(activeProfile);
+        view._record.startRecording(activeProfile);
+        wave = new Waveform.WaveForm(view.recordGrid);
+    }
 });
 
 const RecordButton = new Lang.Class({
