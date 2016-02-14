@@ -50,6 +50,7 @@ const Application = new Lang.Class({
         section.append(_("Preferences"), 'app.preferences');
         section = new Gio.Menu();
         menu.append_section(null, section);
+        section.append(_("Help"), 'app.help');
         section.append(_("About"), 'app.about');
         section.append(_("Quit"),'app.quit');
         this.set_app_menu(menu);
@@ -60,6 +61,14 @@ const Application = new Lang.Class({
             }));
         this.add_action(preferences);
         
+        let helpAction = new Gio.SimpleAction({ name: 'help' });
+        helpAction.connect('activate', Lang.bind(this, 
+            function() {
+                this._showHelp();
+            }));
+        this.add_action(helpAction);
+        this.add_accelerator('<Primary>h', 'app.help', null);
+
         let aboutAction = new Gio.SimpleAction({ name: 'about' });
         aboutAction.connect('activate', Lang.bind(this, 
             function() {
@@ -156,6 +165,16 @@ const Application = new Lang.Class({
          settings.set_double("speaker-volume", level);
     },
     
+    _showHelp: function() {
+        let screen = this.window.get_screen();
+
+        try {
+            Gtk.show_uri(screen, "help:gnome-sound-recorder", Gtk.get_current_event_time());
+        } catch(err) {
+            log("Error opening help " + err.message);   
+        }
+    },
+
     _showAbout: function() {
         let aboutDialog = new Gtk.AboutDialog({ use_header_bar: true });
         aboutDialog.artists = [ 'Reda Lazri <the.red.shortcut@gmail.com>',
