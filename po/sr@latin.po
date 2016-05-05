@@ -7,17 +7,19 @@ msgstr ""
 "Project-Id-Version: gnome-sounds-recorder\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-03-04 08:47+0000\n"
-"PO-Revision-Date: 2015-03-05 22:48+0200\n"
-"Last-Translator: Miroslav Nikolić <miroslavnikolic@rocketmail.com>\n"
+"POT-Creation-Date: 2016-02-28 00:46+0000\n"
+"PO-Revision-Date: 2016-01-17 16:53+0100\n"
+"Last-Translator: Marko M. Kostić (Marko M. Kostić) <marko.m.kostic@gmail."
+"com>\n"
 "Language-Team: Serbian <gnom@prevod.org>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : "
-"n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Project-Style: gnome\n"
+"X-Generator: Poedit 1.8.5\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
 msgid "A simple, modern sound recorder for GNOME"
@@ -70,23 +72,35 @@ msgstr ""
 "podešenog mapiranja, biće korišćena osnovna podešavanja kodera."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Available channels"
+msgstr "Dostupni kanali"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid ""
+"Maps available channels. If there is not no mapping set, stereo channel will "
+"be used by default."
+msgstr ""
+"Mapira dostupne kanale. Ako nema podešenog mapiranja, stereo kanal će se "
+"podrazumevano koristiti."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
 msgid "Microphone volume level"
 msgstr "Jačina zvuka mikrofona"
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
 msgid "Microphone volume level."
 msgstr "Nivo jačine zvuka mikrofona."
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:11
 msgid "Speaker volume level"
 msgstr "Jačina zvuka zvučnika"
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:12
 msgid "Speaker volume level."
 msgstr "Nivo jačine zvuka zvučnika."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:155
-#: ../src/record.js:105
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
+#: ../src/record.js:113
 msgid "Sound Recorder"
 msgstr "Snimač zvuka"
 
@@ -102,7 +116,7 @@ msgstr "zvuk;program;snimanje;"
 msgid "SoundRecorder"
 msgstr "Snimač zvuka"
 
-#: ../src/application.js:50 ../src/preferences.js:39
+#: ../src/application.js:50 ../src/preferences.js:40
 msgid "Preferences"
 msgstr "Postavke"
 
@@ -118,24 +132,25 @@ msgstr "Izađi"
 msgid "Sound Recorder started"
 msgstr "Snimač zvuka je pokrenut"
 
-#. Translators: "Recordings" here refers to the name of the directory where the application places files */
-#: ../src/application.js:89
+#. Translators: "Recordings" here refers to the name of the directory where the application places files
+#: ../src/application.js:93
 msgid "Recordings"
 msgstr "Snimci"
 
-#. Translators: Replace "translator-credits" with your names, one name per line */
-#: ../src/application.js:154
+#. Translators: Replace "translator-credits" with your names, one name per line
+#: ../src/application.js:167
 msgid "translator-credits"
 msgstr ""
 "  Miroslav Nikolić <miroslavnikolic@rocketmail.com>\n"
+"  Marko M. Kostić <marko.m.kostic@gmail.com>\n"
 "\n"
 "http://prevod.org — prevod na srpski jezik"
 
-#: ../src/fileUtil.js:89
+#: ../src/fileUtil.js:88
 msgid "Yesterday"
 msgstr "Juče"
 
-#: ../src/fileUtil.js:91
+#: ../src/fileUtil.js:90
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -144,11 +159,11 @@ msgstr[1] "Pre %d dana"
 msgstr[2] "Pre %d dana"
 msgstr[3] "Pre %d dana"
 
-#: ../src/fileUtil.js:95
+#: ../src/fileUtil.js:94
 msgid "Last week"
 msgstr "Prošle nedelje"
 
-#: ../src/fileUtil.js:97
+#: ../src/fileUtil.js:96
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -157,11 +172,11 @@ msgstr[1] "Pre %d nedelje"
 msgstr[2] "Pre %d nedelja"
 msgstr[3] "Pre %d nedelje"
 
-#: ../src/fileUtil.js:101
+#: ../src/fileUtil.js:100
 msgid "Last month"
 msgstr "Prošlog meseca"
 
-#: ../src/fileUtil.js:103
+#: ../src/fileUtil.js:102
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
@@ -170,11 +185,11 @@ msgstr[1] "Pre %d meseca"
 msgstr[2] "Pre %d meseci"
 msgstr[3] "Pre %d meseca"
 
-#: ../src/fileUtil.js:107
+#: ../src/fileUtil.js:106
 msgid "Last year"
 msgstr "Prošle godine"
 
-#: ../src/fileUtil.js:109
+#: ../src/fileUtil.js:108
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
@@ -183,61 +198,67 @@ msgstr[1] "Pre %d godine"
 msgstr[2] "Pre %d godina"
 msgstr[3] "Pre %d godine"
 
-#: ../src/info.js:46 ../src/mainWindow.js:512
+#: ../src/info.js:44 ../src/mainWindow.js:515
 msgid "Info"
 msgstr "Podaci"
 
-#: ../src/info.js:55
+#: ../src/info.js:48
 msgid "Cancel"
 msgstr "Otkaži"
 
-#: ../src/info.js:69 ../src/mainWindow.js:301
+#. finish button (stop recording)
+#: ../src/info.js:53 ../src/mainWindow.js:314
 msgid "Done"
 msgstr "Gotovo"
 
-#: ../src/info.js:95
+#. File Name item
+#. Translators: "File Name" is the label next to the file name
+#. in the info dialog
+#: ../src/info.js:80
 msgctxt "File Name"
 msgid "Name"
 msgstr "Naziv"
 
-#: ../src/info.js:102
+#. Source item
+#: ../src/info.js:87
 msgid "Source"
 msgstr "Izvor"
 
-#: ../src/info.js:111
+#. Date Modified item
+#: ../src/info.js:96
 msgid "Date Modified"
 msgstr "Datum izmene"
 
-#: ../src/info.js:117
+#. Date Created item
+#: ../src/info.js:102
 msgid "Date Created"
 msgstr "Datum stvaranja"
 
-#: ../src/info.js:128
+#. Media type item
+#. Translators: "Type" is the label next to the media type
+#. (Ogg Vorbis, AAC, ...) in the info dialog
+#: ../src/info.js:113
 msgctxt "Media Type"
 msgid "Type"
 msgstr "Vrsta"
 
-#: ../src/listview.js:127 ../src/listview.js:222
-msgid "%Y-%m-%d %H:%M:%S"
-msgstr "%d. %m. %Y. u %H:%M:%S"
-
-#: ../src/mainWindow.js:112 ../src/mainWindow.js:779
+#: ../src/mainWindow.js:113 ../src/mainWindow.js:794
 msgid "Record"
 msgstr "Snimaj"
 
-#: ../src/mainWindow.js:148
+#: ../src/mainWindow.js:149
 msgid "Add Recordings"
 msgstr "Dodaj snimanja"
 
-#: ../src/mainWindow.js:153
+#: ../src/mainWindow.js:154
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Koristite dugme <b>Snimaj</b> da snimite zvuk"
 
-#: ../src/mainWindow.js:287
+#: ../src/mainWindow.js:300
 msgid "Recording…"
 msgstr "Snimam…"
 
-#: ../src/mainWindow.js:339
+#: ../src/mainWindow.js:352
 #, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
@@ -250,35 +271,43 @@ msgstr[3] "%d snimljeni zvuk"
 msgid "Play"
 msgstr "Pusti"
 
-#: ../src/mainWindow.js:421
+#: ../src/mainWindow.js:422
 msgid "Pause"
 msgstr "Zastani"
 
-#: ../src/mainWindow.js:525
+#: ../src/mainWindow.js:530
 msgid "Delete"
 msgstr "Obriši"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:838
+#: ../src/mainWindow.js:853
+msgid "Mono"
+msgstr "Mono"
+
+#: ../src/mainWindow.js:853
+msgid "Stereo"
+msgstr "Stereo"
+
+#: ../src/mainWindow.js:877
 msgid "Load More"
 msgstr "Učitaj još"
 
@@ -286,43 +315,43 @@ msgstr "Učitaj još"
 msgid "Unable to play recording"
 msgstr "Ne mogu da pustim snimanja"
 
-#: ../src/preferences.js:63
+#: ../src/preferences.js:64
 msgid "Preferred format"
 msgstr "Željeni zapis"
 
-#: ../src/preferences.js:71
+#: ../src/preferences.js:72
+msgid "Default mode"
+msgstr "Podrazumevani režim"
+
+#: ../src/preferences.js:80
 msgid "Volume"
 msgstr "Jačina zvuka"
 
-#: ../src/preferences.js:86
+#: ../src/preferences.js:95
 msgid "Microphone"
 msgstr "Mikrofon"
 
-#: ../src/record.js:66
+#: ../src/record.js:71
 msgid "Unable to create Recordings directory."
 msgstr "Ne mogu da napravim direktorijum „Snimanja“."
 
-#: ../src/record.js:75
+#: ../src/record.js:80
 msgid "Your audio capture settings are invalid."
 msgstr "Vaša podešavanja za snimanje zvuka nisu ispravna."
 
-#: ../src/record.js:122
+#: ../src/record.js:130
 msgid "Not all elements could be created."
 msgstr "Ne mogu svi elementi biti napravljeni."
 
-#: ../src/record.js:133
-#| msgid "Not all of the elements were linked"
+#: ../src/record.js:142
 msgid "Not all of the elements were linked."
 msgstr "Nisu svi elementi povezani."
 
-#: ../src/record.js:158
+#: ../src/record.js:167
 msgid "No Media Profile was set."
 msgstr "Nije podešen profil medija."
 
-#: ../src/record.js:169
-#| msgid ""
-#| "Unable to set the pipeline \n"
-#| " to the recording state"
+#: ../src/record.js:178
 msgid ""
 "Unable to set the pipeline \n"
 " to the recording state."
@@ -331,11 +360,14 @@ msgstr ""
 " na stanje snimanja."
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
-#. by the application (for example, "Clip 1"). */
-#: ../src/record.js:318
+#. by the application (for example, "Clip 1").
+#: ../src/record.js:357
 #, javascript-format
 msgid "Clip %d"
 msgstr "Snimak br. %d"
+
+#~ msgid "%Y-%m-%d %H:%M:%S"
+#~ msgstr "%d. %m. %Y. u %H:%M:%S"
 
 #~ msgid "Preferred media type for encoding audio when recording"
 #~ msgstr "Željena vrsta medija za kodiranje zvuka prilikom snimanja"
