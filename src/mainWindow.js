@@ -59,8 +59,6 @@ let view = null;
 let volumeValue = [];
 let wave = null;
 
-const rtl = Gtk.Widget.get_default_direction() == Gtk.TextDirection.RTL;
-
 const ActiveArea = {
     RECORD: 0,
     PLAY: 1
@@ -391,9 +389,7 @@ const MainView = new Lang.Class({
 
                 // play button
                 this.playImage = Gtk.Image.new({ name: "PlayImage" });
-                this.playImage.set_from_icon_name(rtl ? 'media-playback-start-rtl-symbolic' :
-                                                        'media-playback-start-symbolic',
-                                                  Gtk.IconSize.BUTTON);
+                this.playImage.set_from_icon_name('media-playback-start-symbolic', Gtk.IconSize.BUTTON);
                 this._playListButton = new Gtk.Button({ name: "PlayButton",
                                                         hexpand: true,
                                                         vexpand: true });
@@ -430,7 +426,7 @@ const MainView = new Lang.Class({
                     }));
 
                 this._fileName = new Gtk.Label({ name: "FileNameLabel",
-                                                 ellipsize: rtl ? Pango.EllipsizeMode.START : Pango.EllipsizeMode.END,
+                                                 ellipsize: Pango.EllipsizeMode.END,
                                                  halign: Gtk.Align.START,
                                                  valign: Gtk.Align.START,
                                                  margin_start: 15,
