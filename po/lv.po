@@ -1,14 +1,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>, 2014, 2015, 2016.
+# Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>, 2014, 2015, 2016, 2017.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-so"
-"und-recorder&keywords=I18N+L10N&component=General\n"
-"POT-Creation-Date: 2016-09-06 21:24+0000\n"
-"PO-Revision-Date: 2016-09-08 19:07+0200\n"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-s"
+"ound-recorder&keywords=I18N+L10N&component=General\n"
+"POT-Creation-Date: 2017-03-18 20:24+0000\n"
+"PO-Revision-Date: 2017-04-02 13:55+0200\n"
 "Last-Translator: Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>\n"
 "Language-Team: Latvian <lata-l10n@googlegroups.com>\n"
 "Language: lv\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
-#: ../src/record.js:113
+#: ../src/record.js:120
 msgid "Sound Recorder"
 msgstr "Skaņu ierakstītājs"
 
@@ -262,6 +262,7 @@ msgstr "Izmantojiet pogu <b>Ierakstīt</b>, lai veiktu skaņas ierakstīšanu"
 msgid "Recording…"
 msgstr "Ieraksta…"
 
+#. Translators: This is the title in the headerbar
 #: ../src/mainWindow.js:352
 #, javascript-format
 msgid "%d Recorded Sound"
@@ -338,23 +339,27 @@ msgstr "Mikrofons"
 msgid "Unable to create Recordings directory."
 msgstr "Nevar izveidot ierakstu direktoriju."
 
-#: ../src/record.js:80
+#: ../src/record.js:84
+msgid "Please install the GStreamer 1.0 PulseAudio plugin."
+msgstr "Lūdzu, instalējiet GStreamer 1.0 PulseAudio spraudni."
+
+#: ../src/record.js:86
 msgid "Your audio capture settings are invalid."
 msgstr "Jūsu audio tveršanas iestatījumi ir nederīgi."
 
-#: ../src/record.js:130
+#: ../src/record.js:137
 msgid "Not all elements could be created."
 msgstr "Nevarēja izveidot visus elementus."
 
-#: ../src/record.js:142
+#: ../src/record.js:149
 msgid "Not all of the elements were linked."
 msgstr "Nevarēja sasaistīt visus elementus."
 
-#: ../src/record.js:167
+#: ../src/record.js:174
 msgid "No Media Profile was set."
 msgstr "Netika iestatīts mediju profils."
 
-#: ../src/record.js:178
+#: ../src/record.js:185
 msgid ""
 "Unable to set the pipeline \n"
 " to the recording state."
@@ -364,7 +369,7 @@ msgstr ""
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
 #. by the application (for example, "Clip 1").
-#: ../src/record.js:357
+#: ../src/record.js:364
 #, javascript-format
 msgid "Clip %d"
 msgstr "Klips %d"
