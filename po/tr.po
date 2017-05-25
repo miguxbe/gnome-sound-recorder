@@ -4,26 +4,28 @@
 # Gökhan Gurbetoğlu <ggurbet@gmail.com>, 2014.
 # Muhammet Kara <muhammetk@gmail.com>, 2014, 2015, 2016.
 # Emin Tufan Çetin <etcetin@gmail.com>, 2016
+# Furkan Ahmet Kara <furkanahmetkara.fk@gmail.com>, 2017.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=General\n"
-"POT-Creation-Date: 2016-09-09 12:52+0000\n"
-"PO-Revision-Date: 2016-10-19 00:36+0300\n"
-"Last-Translator: Muhammet Kara <muhammetk@gmail.com>\n"
-"Language-Team: Turkish <gnome-turk@gnome.org>\n"
+"POT-Creation-Date: 2017-05-09 14:58+0000\n"
+"PO-Revision-Date: 2017-05-25 02:52+0300\n"
+"Last-Translator: Furkan Ahmet Kara <furkanahmetkara.fk@gmail.com>\n"
+"Language-Team: Türkçe <gnome-turk@gnome.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Virtaal 0.7.1\n"
+"X-Generator: Gtranslator 2.91.7\n"
 "X-Project-Style: gnome\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
-#: ../src/record.js:113
+#: ../src/record.js:120
 msgid "Sound Recorder"
 msgstr "Ses Kaydedici"
 
@@ -257,6 +259,7 @@ msgstr "Ses kaydı yapmak için <b>Kaydet</b> düğmesini kullanın"
 msgid "Recording…"
 msgstr "Kaydediliyor..."
 
+#. Translators: This is the title in the headerbar
 #: ../src/mainWindow.js:352
 #, javascript-format
 msgid "%d Recorded Sound"
@@ -331,23 +334,27 @@ msgstr "Mikrofon"
 msgid "Unable to create Recordings directory."
 msgstr "Kayıtlar dizini oluşturulamıyor."
 
-#: ../src/record.js:80
+#: ../src/record.js:84
+msgid "Please install the GStreamer 1.0 PulseAudio plugin."
+msgstr "Lütfen GStreamer 1.0 PulseAudio eklentisini yükleyin."
+
+#: ../src/record.js:86
 msgid "Your audio capture settings are invalid."
 msgstr "Ses yakalama ayarlarınız geçersiz."
 
-#: ../src/record.js:130
+#: ../src/record.js:137
 msgid "Not all elements could be created."
 msgstr "Tüm ögeler oluşturulamadı."
 
-#: ../src/record.js:142
+#: ../src/record.js:149
 msgid "Not all of the elements were linked."
 msgstr "Tüm ögeler bağlanamadı."
 
-#: ../src/record.js:167
+#: ../src/record.js:174
 msgid "No Media Profile was set."
 msgstr "Ortam Profili ayarlanmadı."
 
-#: ../src/record.js:178
+#: ../src/record.js:185
 msgid ""
 "Unable to set the pipeline \n"
 " to the recording state."
@@ -357,7 +364,7 @@ msgstr ""
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
 #. by the application (for example, "Clip 1").
-#: ../src/record.js:357
+#: ../src/record.js:364
 #, javascript-format
 msgid "Clip %d"
 msgstr "Klip %d"
