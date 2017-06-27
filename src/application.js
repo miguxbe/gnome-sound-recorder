@@ -89,12 +89,32 @@ const Application = new Lang.Class({
     },
 
     ensure_directory: function() {
+        let documentsDir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOCUMENTS);
         /* Translators: "Recordings" here refers to the name of the directory where the application places files */
-        let path = GLib.build_filenamev([GLib.get_home_dir(), _("Recordings")]);
+        let recsInDocuments = GLib.build_filenamev([documentsDir, _("Recordings")]);
+        let recsInHome = GLib.build_filenamev([GLib.get_home_dir(), _("Recordings")]);
+
+        let defaultPath = settings.get_string("default-path");
+        if (defaultPath == "") {
+            let oldPathExists = GLib.file_test(recsInHome, GLib.FileTest.IS_DIR);
+            if (oldPathExists) {
+                settings.set_string("default-path", recsInHome);
+            } else {
+                settings.set_string("default-path", recsInDocuments);
+            }
+        } else {
+            let defaultDirExists = GLib.file_test(defaultPath, GLib.FileTest.IS_DIR);
+            if (!defaultDirExists) {
+                settings.set_string("default-path", recsInDocuments);
+            }
+        }
+
+        defaultPath = settings.get_string("default-path");
+        let path = GLib.build_filenamev([defaultPath]);
 
         // Ensure Recordings directory
         GLib.mkdir_with_parents(path, parseInt("0755", 8));
-        this.saveDir = Gio.file_new_for_path(path);
+        this.setSaveDir(path);
     },
 
     vfunc_activate: function() {
@@ -118,6 +138,15 @@ const Application = new Lang.Class({
             function(widget, response) {
                 preferencesDialog.widget.destroy();
             }));
+    },
+
+
+    getSaveDir: function () {
+        return this.saveDir;
+    },
+
+    setSaveDir: function (path) {
+        this.saveDir = Gio.file_new_for_path(path);
     },
 
     getPreferences: function() {
@@ -181,4 +210,3 @@ const Application = new Lang.Class({
         });
     }
 });
-
