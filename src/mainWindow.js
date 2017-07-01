@@ -177,7 +177,7 @@ const MainView = new Lang.Class({
         if (play.getPipeStates() == PipelineStates.PLAYING) {
             play.stopPlaying();
             let listRow = this.listBox.get_selected_row();
-            let rowWidget = listRow.get_child(this.widget);
+            let rowWidget = listRow.get_child();
             rowWidget.foreach(Lang.bind(this,
                 function(child) {
 
@@ -365,7 +365,7 @@ const MainView = new Lang.Class({
             this._scrolledWin.get_style_context().add_class('emptyGrid');
             this._addEmptyPage();
         } else {
-            this.listBox = Gtk.ListBox.new({ vexpand: true });
+            this.listBox = new Gtk.ListBox();
             this._scrolledWin.add(this.listBox);
             this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);
             this.listBox.set_header_func(null);
@@ -390,7 +390,7 @@ const MainView = new Lang.Class({
                 this.rowGrid.show();
 
                 // play button
-                this.playImage = Gtk.Image.new({ name: "PlayImage" });
+                this.playImage = new Gtk.Image();
                 this.playImage.set_from_icon_name(rtl ? 'media-playback-start-rtl-symbolic' :
                                                         'media-playback-start-symbolic',
                                                   Gtk.IconSize.BUTTON);
@@ -578,7 +578,7 @@ const MainView = new Lang.Class({
     hasPreviousSelRow: function() {
        this.destroyLoadMoreButton();
            if (previousSelRow != null) {
-              let rowWidget = previousSelRow.get_child(this.widget);
+              let rowWidget = previousSelRow.get_child();
               rowWidget.foreach(Lang.bind(this,
                 function(child) {
                     let alwaysShow = child.get_no_show_all();
@@ -628,7 +628,7 @@ const MainView = new Lang.Class({
             }
 
             previousSelRow = selectedRow;
-            let selectedRowWidget = previousSelRow.get_child(this.widget);
+            let selectedRowWidget = previousSelRow.get_child();
             selectedRowWidget.show_all();
             selectedRowWidget.foreach(Lang.bind(this,
                 function(child) {
@@ -650,7 +650,7 @@ const MainView = new Lang.Class({
 
     _getFileFromRow: function(selected) {
         let fileForAction = null;
-        let rowWidget = selected.get_child(this.fileName);
+        let rowWidget = selected.get_child();
         rowWidget.foreach(Lang.bind(this,
             function(child) {
 
@@ -717,7 +717,7 @@ const MainView = new Lang.Class({
 
         if (activeState == PipelineStates.PLAYING) {
             play.pausePlaying();
-            let rowWidget = listRow.get_child(this.widget);
+            let rowWidget = listRow.get_child();
             rowWidget.foreach(Lang.bind(this,
                 function(child) {
 
@@ -741,7 +741,7 @@ const MainView = new Lang.Class({
         if (activeState != PipelineStates.PLAYING) {
             play.startPlaying();
 
-            let rowWidget = listRow.get_child(this.widget);
+            let rowWidget = listRow.get_child();
             rowWidget.foreach(Lang.bind(this,
                 function(child) {
 

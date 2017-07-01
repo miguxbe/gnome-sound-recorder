@@ -212,7 +212,7 @@ const Listview = new Lang.Class({
     _onDiscovererFinished: function(res, info, err) {
         this.result = res;
         if (this.result == GstPbutils.DiscovererResult.OK && allFilesInfo[this.idx]) {
-            this.tagInfo = info.get_tags(info);
+            this.tagInfo = info.get_tags();
             let appString = "";
             appString = this.tagInfo.get_value_index(Gst.TAG_APPLICATION_NAME, 0);
             let dateTimeTag = this.tagInfo.get_date_time('datetime')[1];
@@ -358,5 +358,3 @@ const Listview = new Lang.Class({
         return allFilesInfo;
     }
 });
-
-
