@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: Gnome Nepali Translation Project\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=General\n"
-"POT-Creation-Date: 2017-03-18 20:24+0000\n"
-"PO-Revision-Date: 2017-08-10 13:56+0545\n"
+"POT-Creation-Date: 2017-08-10 08:12+0000\n"
+"PO-Revision-Date: 2017-10-24 16:24+0545\n"
 "Last-Translator: Pawan Chitrakar <chautari@gmail.com>\n"
 "Language-Team: Nepali Translation Team <chautari@gmail.com>\n"
 "Language: ne_NP\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 2.0.3\n"
+"X-Generator: Poedit 2.0.4\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
@@ -26,11 +26,8 @@ msgid "Sound Recorder"
 msgstr "ध्वनि रेकर्डर"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
-#, fuzzy
 msgid "A simple, modern sound recorder for GNOME"
-msgstr ""
-"जिनोमका लागि एउटा ध्वनि रेकर्डर\n"
-" gnome-media@gnome.org"
+msgstr "जिनोमकाको लागि सरल, आधुनिक ध्वनि रेकर्डर"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
 msgid ""
@@ -38,12 +35,17 @@ msgid ""
 "straight-forward way to record and play audio. It allows you to do basic "
 "editing, and create voice memos."
 msgstr ""
+"ध्वनि रिकर्डरले सरल र आधुनिक इन्टरफेस प्रदान गर्दछ जसले अडियो र रेकर्ड गर्न र सीधा "
+"निर्देशन प्रदान गर्दछ। यसले तपाईंलाई आधारभूत सम्पादन गर्न अनुमति दिन्छ, र आवाज मेमोहरू "
+"सिर्जना गर्दछ।."
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:4
 msgid ""
 "Sound Recorder automatically handles the saving process so that you do not "
 "need to worry about accidentally discarding the previous recording."
 msgstr ""
+"ध्वनि रेकर्डरले स्वचालित रूपमा बचत प्रक्रियालाई ह्यान्डल गर्दछ ताकि तपाइँ अघिल्लो "
+"रेकर्डिङलाई गलत तरिकाले खारेज गर्ने बारे चिन्ता गर्नुपर्दैन।"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:5
 msgid "Supported audio formats:"
@@ -51,7 +53,7 @@ msgstr "समर्थित ध्वनि ढाँचाहरू:"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:6
 msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
-msgstr ""
+msgstr "Ogg Vorbis, Opus, FLAC, MP3 र MOV"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
 msgid "Window size"
@@ -71,13 +73,15 @@ msgstr "सन्झ्यालको स्थान (x र y)"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
 msgid "Maps media types to audio encoder preset names."
-msgstr ""
+msgstr "मिडिया प्रकार ध्वनि एन्कोडर प्रिसेट नामहरूमा मापन गर्छ।"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
 msgid ""
 "Maps media types to audio encoder preset names. If there is no mapping set, "
 "the default encoder settings will be used."
 msgstr ""
+"मिडिया प्रकार ध्वनि एन्कोडर प्रिसेट नामहरूमा मापन गरिन्छ। यदि कुनै मापन सेट छैन भने, "
+"पूर्वनिर्धारित एन्कोडर सेटिङ्ग प्रयोग गरिनेछ।"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
 msgid "Available channels"
@@ -88,30 +92,28 @@ msgid ""
 "Maps available channels. If there is not no mapping set, stereo channel will "
 "be used by default."
 msgstr ""
+"उपलब्ध च्यानलहरूमा मापन गर्दछ। यदि त्यहाँ मापन सेट छैन भने, स्टेरियो च्यानल पूर्वनिर्धारित "
+"रूपमा प्रयोग गरिनेछ।"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
-#, fuzzy
 msgid "Microphone volume level"
-msgstr "भोल्युम"
+msgstr "माइक्रोफोन ध्वनि स्तर"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
-#, fuzzy
 msgid "Microphone volume level."
-msgstr "भोल्युम"
+msgstr "माइक्रोफोन ध्वनि स्तर"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:11
-#, fuzzy
 msgid "Speaker volume level"
-msgstr "निसानी"
+msgstr "स्पीकर ध्वनि स्तर"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:12
-#, fuzzy
 msgid "Speaker volume level."
-msgstr "निसानी"
+msgstr "स्पीकर ध्वनि स्तर"
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
 msgid "Record sound via the microphone and play it back"
-msgstr ""
+msgstr "माइक्रोफोन मार्फत रेकर्ड गर्नुहोस् र यसलाई बजाउनुहोस्"
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
 msgid "Audio;Application;Record;"
@@ -119,7 +121,7 @@ msgstr "ध्वनि;अनुप्रयोग;रकर्ड;"
 
 #: ../src/application.js:43
 msgid "SoundRecorder"
-msgstr ""
+msgstr "ध्वनि रेकर्डर"
 
 #: ../src/application.js:50 ../src/preferences.js:40
 msgid "Preferences"
@@ -134,14 +136,13 @@ msgid "Quit"
 msgstr "अन्त्य गर्नुहोस्"
 
 #: ../src/application.js:83
-#, fuzzy
 msgid "Sound Recorder started"
-msgstr "अडियो सीडी रेकर्डर"
+msgstr "ध्वनि रेकर्डर सुरु भयो"
 
 #. Translators: "Recordings" here refers to the name of the directory where the application places files
 #: ../src/application.js:93
 msgid "Recordings"
-msgstr ""
+msgstr "रेकर्डिङ्गहरू"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: ../src/application.js:167
@@ -251,7 +252,7 @@ msgstr "रेकर्डिङ्ग थप्नुहोस्"
 
 #: ../src/mainWindow.js:154
 msgid "Use the <b>Record</b> button to make sound recordings"
-msgstr ""
+msgstr "ध्वनि रेकर्डिङ गर्नको लागि <b> रेकर्ड </b> बटन प्रयोग गर्नुहोस्"
 
 #: ../src/mainWindow.js:300
 msgid "Recording…"
@@ -259,11 +260,11 @@ msgstr "रेकर्ड गर्दै…"
 
 #. Translators: This is the title in the headerbar
 #: ../src/mainWindow.js:352
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
-msgstr[0] "ध्वनि बजाउनुहोस्"
-msgstr[1] ""
+msgstr[0] "%d रेकर्ड गरिएको ध्वनि"
+msgstr[1] "%d रेकर्ड गरिएको ध्वनिहरू"
 
 #: ../src/mainWindow.js:401
 msgid "Play"
@@ -315,7 +316,7 @@ msgstr "रेकर्डिङ्ग बजाउन असफल"
 
 #: ../src/preferences.js:64
 msgid "Preferred format"
-msgstr "रुचाइएको ढाँचा:"
+msgstr "रुचाइएको ढाँचा"
 
 #: ../src/preferences.js:72
 msgid "Default mode"
@@ -335,32 +336,31 @@ msgstr "रेकर्डिङ्ग डाइरेक्टरी सिर�
 
 #: ../src/record.js:84
 msgid "Please install the GStreamer 1.0 PulseAudio plugin."
-msgstr ""
+msgstr "कृपया जिस्ट्रिमर १.० पल्सअडियो प्लगइन स्थापना गर्नुहोस्।"
 
 #: ../src/record.js:86
 msgid "Your audio capture settings are invalid."
-msgstr ""
+msgstr "तपाईंको ध्वनि क्याप्चर सेटिङ्ग अमान्य छ।"
 
 #: ../src/record.js:137
-#, fuzzy
 msgid "Not all elements could be created."
-msgstr "म्याट्रिक्समा सबै तत्वहरूको गुणन गणना गर्नुहोस्"
+msgstr "सबै तत्वहरूको सिर्जना गर्न सकिदैन"
 
 #: ../src/record.js:149
-#, fuzzy
 msgid "Not all of the elements were linked."
-msgstr "सबै तह(हरू) लिङ्क सेट गर्नुहोस्"
+msgstr "सबै तत्वहरू लिंक गरिएको थिएनन्।"
 
 #: ../src/record.js:174
-#, fuzzy
 msgid "No Media Profile was set."
-msgstr "सेटअप गर्न क्लिक गर्नुहोस्"
+msgstr "सेटकुनै मिडिया प्रोफाईल सेट गरिएको छैन।"
 
 #: ../src/record.js:185
 msgid ""
 "Unable to set the pipeline \n"
 " to the recording state."
 msgstr ""
+"पाइपलाइन सेट गर्न असमर्थ\n"
+"  रेकर्डिंङ्ग अवस्थामा।"
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
 #. by the application (for example, "Clip 1").
