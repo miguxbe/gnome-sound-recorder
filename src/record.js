@@ -47,8 +47,8 @@ const ErrState = {
 }
 
 const Channels = {
-    MONO: 0,
-    STEREO: 1
+    MONO: 1,
+    STEREO: 2
 }
 
 const _TENTH_SEC = 100000000;
@@ -306,23 +306,13 @@ const Record = new Lang.Class({
 
     _getChannels: function() {
 
-        let channels = null;
         let channelsPref = Application.application.getChannelsPreferences();
 
-        switch(channelsPref) {
-        case Channels.MONO:
-            channels = 1;
-            break;
+        if(channelsPref == Channels.MONO)
+           return Channels.MONO;
 
-        case Channels.STEREO:
-            channels = 2;
-            break;
 
-        default:
-            channels = 2;
-        }
-
-        return channels;
+        return Channels.STEREO;
     },
 
     _showErrorDialog: function(errorStrOne, errorStrTwo) {
