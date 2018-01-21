@@ -238,6 +238,7 @@ const Record = new Lang.Class({
 
                 this._showErrorDialog(errorOne, errorTwo);
                 errorDialogState = ErrState.ON;
+                break;
             }
 
             let s = message.get_structure();
@@ -354,16 +355,15 @@ const BuildFileName = new Lang.Class({
     Name: "BuildFileName",
 
     buildInitialFilename: function() {
-        let fileExtensionName = MainWindow.audioProfile.fileExtensionReturner();
-        let dir = Gio.Application.get_default().saveDir;
+        var fileExtensionName = MainWindow.audioProfile.fileExtensionReturner();
+        var dir = Gio.Application.get_default().saveDir;
         this.dateTime = GLib.DateTime.new_now_local();
-        this.clipNumber = Listview.trackNumber + 1;
-        this.clipNumberString = this.clipNumber.toString();
+        var clipNumber = Listview.trackNumber + 1;
         /* Translators: ""Clip %d"" is the default name assigned to a file created
             by the application (for example, "Clip 1"). */
-        let clipName = _("Clip %d").format(this.clipNumberString);
+        var clipName = _("Clip %d").format(clipNumber.toString());
         this.clip = dir.get_child_for_display_name(clipName);
-        let file = this.clip.get_path();
+        var file = this.clip.get_path();
         return file;
     },
 

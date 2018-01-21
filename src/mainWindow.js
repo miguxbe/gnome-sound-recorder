@@ -57,7 +57,7 @@ let setVisibleID = null;
 let UpperBoundVal = 182;
 let view = null;
 let volumeValue = [];
-let wave = null;
+var wave = null;
 
 const rtl = Gtk.Widget.get_default_direction() == Gtk.TextDirection.RTL;
 
@@ -365,7 +365,7 @@ const MainView = new Lang.Class({
             this._scrolledWin.get_style_context().add_class('emptyGrid');
             this._addEmptyPage();
         } else {
-            this.listBox = Gtk.ListBox.new({ vexpand: true });
+            this.listBox = new Gtk.ListBox({ vexpand: true });
             this._scrolledWin.add(this.listBox);
             this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);
             this.listBox.set_header_func(null);
@@ -390,7 +390,7 @@ const MainView = new Lang.Class({
                 this.rowGrid.show();
 
                 // play button
-                this.playImage = Gtk.Image.new({ name: "PlayImage" });
+                this.playImage = new Gtk.Image({ name: "PlayImage" });
                 this.playImage.set_from_icon_name(rtl ? 'media-playback-start-rtl-symbolic' :
                                                         'media-playback-start-symbolic',
                                                   Gtk.IconSize.BUTTON);
@@ -815,7 +815,7 @@ const RecordButton = new Lang.Class({
 
         audioProfile.profile(activeProfile);
         view._record.startRecording(activeProfile);
-        wave = new Waveform.WaveForm(view.recordGrid);
+        wave = new Waveform.WaveForm(view.recordGrid, null);
     }
 });
 
