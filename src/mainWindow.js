@@ -57,7 +57,7 @@ let setVisibleID = null;
 let UpperBoundVal = 182;
 let view = null;
 let volumeValue = [];
-let wave = null;
+var wave = null;
 
 const ActiveArea = {
     RECORD: 0,
@@ -363,7 +363,7 @@ const MainView = new Lang.Class({
             this._scrolledWin.get_style_context().add_class('emptyGrid');
             this._addEmptyPage();
         } else {
-            this.listBox = Gtk.ListBox.new({ vexpand: true });
+            this.listBox = new Gtk.ListBox({ vexpand: true });
             this._scrolledWin.add(this.listBox);
             this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);
             this.listBox.set_header_func(null);
@@ -811,7 +811,7 @@ const RecordButton = new Lang.Class({
 
         audioProfile.profile(activeProfile);
         view._record.startRecording(activeProfile);
-        wave = new Waveform.WaveForm(view.recordGrid);
+        wave = new Waveform.WaveForm(view.recordGrid, null);
     }
 });
 

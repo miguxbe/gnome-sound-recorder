@@ -60,7 +60,7 @@ let fileInfo = null;
 let listType = null;
 let startRecording = false;
 let stopVal = null;
-let trackNumber = 0;
+var trackNumber = 0;
 
 const Listview = new Lang.Class({
     Name: "Listview",
@@ -74,15 +74,8 @@ const Listview = new Lang.Class({
     },
 
     monitorListview: function() {
-        try {
         this.dirMonitor = this._saveDir.monitor_directory(Gio.FileMonitorFlags.WATCH_MOVES, null);
         this.dirMonitor.connect('changed', this._onDirChanged);
-        } catch(e) {
-            log(e);
-            /* Workaround for Debian and Tails not recognizing Gio.FileMointor.WATCH_MOVES */
-            this.dirMonitor = this._saveDir.monitor_directory(Gio.FileMonitorFlags.NONE, null);
-            this.dirMonitor.connect('changed', this._onDirChangedDeb);
-        }
     },
 
     enumerateDirectory: function() {
@@ -117,7 +110,9 @@ const Listview = new Lang.Class({
                                     let returnedNumber = parseInt(returnedName.split(" ")[1]);
                                     if (returnedNumber > trackNumber)
                                         trackNumber = returnedNumber;
+
                                 }  catch (e if e instanceof TypeError) {
+                                    log("Tracknumber not returned");
                                     // Don't handle the error
                                 }
                                 let finalFileName = GLib.build_filenamev([this._saveDir.get_path(),
@@ -212,7 +207,7 @@ const Listview = new Lang.Class({
     _onDiscovererFinished: function(res, info, err) {
         this.result = res;
         if (this.result == GstPbutils.DiscovererResult.OK && allFilesInfo[this.idx]) {
-            this.tagInfo = info.get_tags(info);
+            this.tagInfo = info.get_tags();
             let appString = "";
             appString = this.tagInfo.get_value_index(Gst.TAG_APPLICATION_NAME, 0);
             let dateTimeTag = this.tagInfo.get_date_time('datetime')[1];

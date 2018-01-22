@@ -245,9 +245,10 @@ const WaveForm = new Lang.Class({
 
             if (peaks.length < this.recordTime) {
                 log("error");
+                return true;
             }
-
-            this.drawing.queue_draw();
+            if (this.drawing)
+                this.drawing.queue_draw();
         }
         return true;
     },
@@ -258,6 +259,10 @@ const WaveForm = new Lang.Class({
 
         this.count = 0;
         peaks.length = 0;
-        this.drawing.destroy();
+        try {
+            this.drawing.destroy();
+        } catch (e) {
+            log(e);
+        }
     }
 });
